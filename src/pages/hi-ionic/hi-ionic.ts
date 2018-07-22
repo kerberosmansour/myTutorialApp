@@ -7,6 +7,8 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
   templateUrl: 'hi-ionic.html'
 })
 export class HiIonicPage {
+  scanSub: any;
+
   constructor(public navCtrl: NavController,
             private qrScanner: QRScanner) {
 
@@ -19,11 +21,9 @@ export class HiIonicPage {
        console.log('Camera Permission Given');
 
         this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-
-        console.log('Scanned something', text);
-        this.qrScanner.hide();
-        scanSub.unsubscribe();
-
+          console.log('Scanned something', text);
+          this.qrScanner.hide();
+          this.scanSub.unsubscribe();
        });
 
        this.qrScanner.show();
